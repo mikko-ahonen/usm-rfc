@@ -1,10 +1,10 @@
-# USM Workflow JSON Format
+# USM Workflow Interchange Format
 
 ## Abstract
 
-USM Workflow JSON Format represents descriptions of Unified Service 
-Management (USM) workflows using JSON-based data structures. This 
-format is useful for increasing the interoperability between systems
+USM Workflow Interchange Format represents descriptions of Unified Service 
+Management (USM) workflows using JSON-based data structures. The 
+purpose is to allow for interoperability between systems
 supporting the USM method. JSON is a lightweight, text-based, 
 language-independent data interchange format commonly used in Internet 
 applications.
@@ -22,28 +22,28 @@ document authors. All rights reserved.
 
 ## Introduction
 
-USM Workflow JSON Format represents descriptions of Unified Service 
+USM Workflow Interchange Format represents descriptions of Unified Service 
 Management (USM) workflows using Javascript Object Notation (JSON) based 
-data structures. 
+data structures.
 
 The purpose of this format is to allow interoperability between 
-systems used to deploy USM in an organization.
+systems used to deploy USM in an organization. Specifically, this typically 
+helps to integrate Business Process Management (BPM) systems with
+Workflow (also known as Customer Support or Ticketing) systems.
 
-Specifically, this is typically helpful to tie workflow and 
-customer support or ticketing systems.
+JSON was chosen as the interchange format, as it is an 
+open and de facto standard data interchange format. Text to store 
+and transmit data objects is human-readable. As it is very common 
+data format lightweight libraries for parsing and generating JSON data 
+are readily available in many programming languages. 
 
-JSON was chosen as the interchange format, because JSON is an 
-open standard file and data interchange format. Text to store and transmit 
-data objects is human-readable. It is also a very common data format, and
-lightweight libraries for parsing and generating JSON data is readily 
-available in many programming languages. 
+This memo defines two formats, one for workflow template and
+one for workflow, that are almost identical, except for their
+place in the life cycle of definitions.
 
 ### Terminology
 
-These terms are defined by this specification:
-
-USM Workflow JSON Format
-    TODO: Missing definition
+    TODO
 
 ### Notational Conventions
 
@@ -69,22 +69,34 @@ The concatenation of two values A and B is denoted as A || B.
 
 ## MIME types
 
+Two temporary MIME types are proposed. Later, these should be 
+registered with IANA (Internet Assigned Numbers Authority).
+
 application/x-usm-workflow-template
+    MIME type used for workflow templates.
+
 application/x-usm-workflow
+    MIME type used for workflows.
 
 ## File extensions
 
-.workflow-template.json
-.workflow
+Two file extensions are proposed.
 
-## Metadata
+.workflow-template.json
+    File extension used for workflow templates.
+
+.workflow.json
+    File extension used for workflows.
+
+## Fields
 
 ### format-version
 
-Format version field "format-version" corresponds to the version of the USM Workflow JSON format.
+Format version field "format-version" corresponds to the version of the USM
+Workflow Interchjange format.
 
-The value MUST be a JSON string. The versioning is based on semantic versioning [SEMVER2]. For this 
-version of the document, it MUST be string literal "1.0.0"
+The value MUST be a JSON string. The versioning is based on semantic versioning
+[SEMVER2]. For this version of the document, it MUST be string literal "1.0.0"
 
 Example:
 
@@ -99,14 +111,19 @@ Example:
 
 originating-system-type uniquely identifies the originating system.
 
-The value MUST be a JSON string. The system-specific value is assigned by SURVUZ Foundation on
-request.
+The value MUST be a JSON string. The value MUST consist of two
+parts, seperated by colon. First part MUST be the domain name of 
+the system vendor. The second part is system name, uniquely identifying
+the software within the vendor.
+
+The identifier MUST contain only alphanumeric characters and dash.
+Colon is used as a separator.
 
 Example:
 
   {
     ...
-    "originating-system-type": "foobar",
+    "originating-system-type": "foo.com:bar",
     ...
   }
 
@@ -120,7 +137,7 @@ Example:
 
   {
     ...
-    "originating-system-version": "1.0A",
+    "originating-system-version": "1.0",
     ...
   }
 
@@ -128,8 +145,9 @@ Example:
 
 originating-system-instance uniquely identifies the instance of the originating system.
 
-The value MUST be JSON string. The values are system-specific, but aggregate of (originating-system-type, 
-originating-system-instance) MUST be globally unique.
+The value MUST be a JSON string. The values are system-specific, but aggregate
+of (originating-system-type, originating-system-instance) MUST be globally
+unique.
 
 Example:
 
@@ -143,9 +161,10 @@ Example:
 
 workflow-version field specifies the version of the content.
 
-The value MUST be JSON string. The actual value is specific to originating system type. The value must be 
-unique within the workflow. The versioning MAY use semantic versioning [SEMVER2]. However, it might not be possible to 
-deduce ordering of the values from the values.
+The value MUST be JSON string. The actual value is specific to originating
+system. The value MUST be unique within the workflow. The versioning MAY
+use semantic versioning [SEMVER2]. However, it might not be possible to deduce
+ordering of the values from the values. The example below uses UUIDs.
 
 Example:
 
@@ -176,17 +195,14 @@ created-by field identifies the creator of the workflow.
 
 The value MUST be a JSON object representing a person, with the following keys and values:
 
-### id - required
+id - required
+  id MUST be a JSON string uniquely identifying the person within the workflow system instance.
 
-id MUST be a JSON string uniquely identifying the person in the workflow system instance.
+name - optional
+  if present, name MUST be a JSON string for the name of the person. The value is optional.
 
-### name - optional
-
-if present, name MUST be a JSON string for the name of the person. The value is optional.
-
-### email - optional
-
-if present, name MUST be a JSON string for the email of the person. The value is optional.
+email - optional
+  if present, name MUST be a JSON string for the email of the person. The value is optional.
 
 Example: 
 
@@ -207,7 +223,6 @@ modified-at field specifies the last time the workflow was modified.
 The value MUST be a JSON string, and it MUST correspond to the ISO-8601 date and time format 
 [ISO-8601-1984]. Milliseconds SHOULD be used to provide better granularity.
 
-
 Example:
 
   {
@@ -223,17 +238,14 @@ modified-by field identifies the last modifier of the workflow.
 
 The value MUST be a JSON object representing a person, with the following keys and values:
 
-### id - required
+id - required
+  id MUST be a JSON string uniquely identifying the person within the workflow system instance.
 
-id MUST be a JSON string uniquely identifying the person in the workflow system instance.
+name - optional
+  if present, name MUST be a JSON string for the name of the person. The value is optional.
 
-### name - optional
-
-if present, name MUST be a JSON string for the name of the person. The value is optional.
-
-### email - optional
-
-if present, name MUST be a JSON string for the email of the person. The value is optional.
+email - optional
+  if present, name MUST be a JSON string for the email of the person. The value is optional.
 
 Example: 
 
@@ -247,33 +259,153 @@ Example:
     ...
  }
 
-### workflow-type
+### process
 
-workflow-type field specifies the type of the workflow.
+process field specifies the USM process.
 
+The value MUST be a JSON string, and it MUST have one of the following string literal values:
 
+"agree"
+  Agree process
+
+"change"
+  Change process
+
+"recover"
+  Recover process
+
+"operate"
+  Operate process
+
+"improve"
+  Improve process
+
+### dynamicity
+
+dynamicity field specifies whether the workflow is static or dynamic, with the following string literal values:
+
+"static"
+  For static workflows, the path through the USM processes is pre-defined.
+
+"dynamic"
+  For dynamic workflows, it is determined at the fork step in the workflow.
 
 ### context
 
-name field identifies a context for the workflows. The name MUST be unique within the
-system instance. The values are typically specific to the organization where USM is deployed.
-For example, they might correspond to the organization hierarchy.
+context field identifies the domain for the workflows. The field MUST be unique within the
+system instance. 
+
+The name MUST be a JSON string. The values are typically specific to the organization 
+where USM is deployed. For example, they might correspond to the organization hierarchy.
+
+### slug
+
+slug field identifies short, human-readable name of the workflow. The slug MUST be unique within the
+context.
+
+The slug MUST be a JSON string. Workflow definition MUST include this field.
+
+The field MUST only contain alphanumeric characters and dashes. The field MUST NOT start or end with
+dashes, or contain multiple consequtive dashes.
 
 ### name
 
-name field identifies the human-readable name of the workflow. The name MUST be unique within the
-context.
+name field is a human-readable name of the workflow. The name SHOULD be unique within the context.
+
+The name MUST be a JSON string. Workflow definition MUST include this field.
 
 ### description
 
-## steps
+description field identifies the human-readable description of the workflow.
 
-Teps 
+The description MUST be a JSON string. Workflow definition MAY include this field.
+
+### type
+
+type field identifies the type of the document. It MUST be a JSON string, and one of two string 
+literal values is allowed.
+
+"workflow-template"
+  For workflow templates. Workflow templates are used as a basis for workflow definitions.
+
+"workflow"
+  For workflows. Workflows are more commonly used for interoperabilty between Business Process
+  Management (BPM) and Workflow systems.
+
+### steps
+
+Contains a JSON list of step items, defined below.
+
+#### step item
+
+##### id
+
+id field MUST uniquely identify the step within the workflow.
+
+This field MUST be a JSON string.
+
+##### name
+
+name field is a human-readable name for the step.
+
+This field MUST be a JSON string.
+
+##### name
+
+description field is a human-readable description for the step.
+
+This field MUST be a JSON string.
+
+##### process
+
+process field specifies the USM process for this step.
+
+The value MUST be a JSON string, and it MUST have one of the same string literal values 
+defined for the process. This is used to provide all the alternatives 
+
+##### activities
+
+activities field specifies a list of activities and the responsiblity assignment
+matrix according to the RACI model [RACI].
+
+It contains the following fields:
+
+id
+    This field MUST uniquely identify the activity within the step. This field MUST 
+    be a JSON string.
+  
+description
+    Human-readable description of the activity. This field MUST be a JSON string.
+
+responsibilities
+    List of responsibility assignments. This field MUST be a JSON object, where key is
+    the identifier of a profile, and value is a list of JSON string literals
 
 ## profiles
 
+Contains a JSON list of profile items, defined below.
+
+### profile item
+
+A JSON object representing a profile, with the following fields:
+
+id
+    This field MUST uniquely identify the role. This value MUST be JSON string.
+    This field MUST be unique within the
+    organization using this USM deployment.
+
+name
+    Human-readable name for the activity. This field MUST be a JSON string.
+
+# Internationalization and Localization
+
+    TODO
 
 # Security Considerations
+
+    TODO
+
+# An Example
 
 # Acknowledgments
 
@@ -290,6 +422,9 @@ Teps
               interchange -- Representation of dates and times", ISO
               8601, December 2004,
               <http://www.iso.org/iso/catalogue_detail?csnumber=40874>.
+
+   [RACI]     Smith, M., Erwin J., "Role & Responsibility Charting (RACI)", 
+              Project Management Forum, 2005.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
