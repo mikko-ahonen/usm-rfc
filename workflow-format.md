@@ -92,24 +92,40 @@ meaning of the message.  A receiving implementation MAY treat
 two messages as equivalent if they differ only in the order of
 the object members.
 
-## MIME types
+## IANA Considerations
 
-Two temporary MIME types are proposed to be used. Later, we aim to 
-register corresponding MIME types with IANA (Internet Assigned 
-Numbers Authority).
+No MIME types have been requested from Internet Assigned Numbers Authority 
+(IANA). The following temporary conventions MUST be used.
 
-"application/x-usm-workflow-template" - MIME type used for workflow templates.
+In future, official MIME types will be requested.
 
-"application/x-usm-workflow" - MIME type used for workflows.
+### Workflow
 
-## File extensions
+#### MIME type
 
-Two following filename extensions SHOULD be used for the
-file formats.
+The following temporary MIME type MUST be used for workflows.
 
-".workflow-template.json" - File extension used for workflow templates.
+"application/x-usm-workflow"
 
-".workflow.json" - File extension used for workflows.
+#### File extension
+
+The following file extension MUST be used for workflows.
+
+".workflow.json" 
+
+### Workflow template
+
+#### MIME type
+
+The following temporary MIME type MUST be used for workflow templates.
+
+"application/x-usm-workflow-template"
+
+#### File extension
+
+The following file extension MUST be used for workflow templates.
+
+".workflow-template.json"
 
 ## Entities
 
