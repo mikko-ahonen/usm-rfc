@@ -528,8 +528,8 @@ specific to USM-WIF.
 
 ## Author's Address
 
-   Mikko Ahonen (editor)
+   Mikko Ahonen (editor)<br/>
    USM Coach
 
-   E-Mail: mikko@usm.coach
+   E-Mail: mikko@usm.coach<br/>
    URI:    https://usm.coach/
