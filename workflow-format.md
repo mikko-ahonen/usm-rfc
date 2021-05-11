@@ -38,12 +38,13 @@ data format lightweight libraries for parsing and generating JSON data
 are readily available in many programming languages. 
 
 This memo defines two formats, one for workflow template and
-one for workflow, that are almost identical, except for their
-place in the life cycle of definitions.
+one for workflow, that are almost identical, except that requirements for
+required fields are more relaxed.
 
 ### Terminology
 
-TODO
+USM Workflow Interchange Format (USM-WIF)
+: JSON format defined in this document for USM Workflow interchange.
 
 ### Notational Conventions
 
@@ -113,15 +114,17 @@ Person entity has been omitted for simplicity.
     | +---------------+ |
     +-------------------+
 
-### Workflow and Workflow template
+### Workflow (and Workflow template)
 
-Workflow is the top-level entity. Workflow templates follow the same format as 
-the workflows, but there are no required fields.
+Workflow is the top-level entity.
+
+Workflow templates have exactly the same format as the workflows, but there 
+are no required fields.
 
 #### format-version
 
 Field "format-version" corresponds to the version of the USM Workflow 
-Interchjange format. The value MUST be a JSON string. The versioning is
+Interchange format. The value MUST be a JSON string. The versioning is
 based on semantic versioning [SEMVER2]. For this version of the document, 
 it MUST be string literal "1.0.0"
 
