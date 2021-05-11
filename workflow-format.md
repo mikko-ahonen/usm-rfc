@@ -46,6 +46,16 @@ required fields are more relaxed.
 <dl>
     <dt>USM Workflow Interchange Format (USM-WIF)</dt>
     <dd>JSON format defined in this document for USM Workflow interchange.</dd>
+
+    <dt>Must-Ignore Policy</dt>
+    <dd>When an implementation encounters a protocol element that it does not
+        recognize, it should treat the rest of the protocol transaction as if
+        the new element simply did not appear, and in particular, the
+        implementation MUST NOT treat this as an error condition. [RFC ]</dd>
+
+    <dt>Must-Understand Policy</dt>
+    <dd>Implementations do not tolerate the introduction of new elements 
+        that they do not recognize, but treat this as an error condition. [RFC ]</dd>
 </dl>
 
 ### Notational Conventions
@@ -69,6 +79,17 @@ of STRING, where STRING is a sequence of zero or more ASCII
 characters.
 
 The concatenation of two values A and B is denoted as A || B.
+
+## Protocol Implementation Details
+
+The implementations processing USM-WIF entities, MUST follow the
+Must-Ignore Policy, in other words MUST NOT treat unrecognized elements 
+as an error condition.
+
+The order of object members in an USM-WIF message MUST NOT change the
+meaning of the message.  A receiving implementation MAY treat
+two messages as equivalent if they differ only in the order of
+the object members.
 
 ## MIME types
 
@@ -487,6 +508,8 @@ specific to USM-WIF.
 
    [RFC7159]  Bray, T., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, March 2014.
+
+   [RFC7493] 
 
    [SEMVER2]  Preston-Werner, T. "Semantic Versioning 2.0.0", 
               <https://semver.org/>
