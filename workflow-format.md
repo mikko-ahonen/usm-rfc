@@ -69,8 +69,9 @@ The concatenation of two values A and B is denoted as A || B.
 
 ## MIME types
 
-Two temporary MIME types are proposed. Later, these should be 
-registered with IANA (Internet Assigned Numbers Authority).
+Two temporary MIME types are proposed to be used. Later, we aim to 
+register corresponding MIME types with IANA (Internet Assigned 
+Numbers Authority).
 
 application/x-usm-workflow-template
     MIME type used for workflow templates.
@@ -80,7 +81,8 @@ application/x-usm-workflow
 
 ## File extensions
 
-Two file extensions are proposed.
+Two following filename extensions SHOULD be used for the
+file formats.
 
 .workflow-template.json
     File extension used for workflow templates.
@@ -566,8 +568,8 @@ specific to USM-WIF.
 
 # Acknowledgments
 
-   The authors would like to thank the following for their valuable
-   contributions: ...
+   The authors would like to thank the following people for their 
+   valuable contributions: ...
 
 #  References
 
