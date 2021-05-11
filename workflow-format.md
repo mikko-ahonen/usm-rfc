@@ -35,7 +35,7 @@ JSON was chosen as the interchange format, as it is an
 open and de facto standard data interchange format. Text to store 
 and transmit data objects is human-readable. As it is very common 
 data format lightweight libraries for parsing and generating JSON data 
-are readily available in many programming languages. 
+are readily available in practically all programming languages. 
 
 This memo defines two formats, one for workflow template and
 one for workflow, that are almost identical, except that requirements for
