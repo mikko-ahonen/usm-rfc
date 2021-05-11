@@ -51,11 +51,12 @@ required fields are more relaxed.
     <dd>When an implementation encounters a protocol element that it does not
         recognize, it should treat the rest of the protocol transaction as if
         the new element simply did not appear, and in particular, the
-        implementation MUST NOT treat this as an error condition. [RFC ]</dd>
+        implementation MUST NOT treat this as an error condition. [RFC7493]</dd>
 
     <dt>Must-Understand Policy</dt>
     <dd>Implementations do not tolerate the introduction of new elements 
-        that they do not recognize, but treat this as an error condition. [RFC ]</dd>
+        that they do not recognize, but treat them as an error condition.
+        [RFC7493]</dd>
 </dl>
 
 ### Notational Conventions
@@ -443,7 +444,7 @@ Human-readable description of the activity. This field MUST be a JSON string.
 
 List of responsibility assignments. The field value MUST be a JSON object, 
 where key is the identifier of a profile, and value is a list of JSON string 
-literals, referring to the RACI model responsibility roles.
+literals, referring to the RACI model responsibility roles [RACI].
 
 * "R" - Responsible
 * "A" - Accountable
@@ -495,24 +496,31 @@ specific to USM-WIF.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
+              <http://www.rfc-editor.org/info/rfc2119>.
 
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66, RFC
-              3986, January 2005.
+              3986, January 2005,
+              <http://www.rfc-editor.org/info/rfc3986>.
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
-              Encodings", RFC 4648, October 2006.
+              Encodings", RFC 4648, October 2006,
+              <http://www.rfc-editor.org/info/rfc4648>.
 
    [RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
-              Specifications: ABNF", STD 68, RFC 5234, January 2008.
+              Specifications: ABNF", STD 68, RFC 5234, January 2008,
+              <http://www.rfc-editor.org/info/rfc5234>.
 
    [RFC7159]  Bray, T., "The JavaScript Object Notation (JSON) Data
-              Interchange Format", RFC 7159, March 2014.
+              Interchange Format", RFC 7159, March 2014,
+              <http://www.rfc-editor.org/info/rfc7159>.
 
-   [RFC7493] 
+   [RFC7493]  Bray, T., Ed., "The I-JSON Message Format", RFC 7493,
+              DOI 10.17487/RFC7493, March 2015,
+              <http://www.rfc-editor.org/info/rfc7493>.
 
    [SEMVER2]  Preston-Werner, T. "Semantic Versioning 2.0.0", 
-              <https://semver.org/>
+              <https://semver.org/>.
 
 ## Informative References
 
