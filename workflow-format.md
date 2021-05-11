@@ -145,9 +145,9 @@ Workflow is the top-level entity.
 Workflow templates have exactly the same format as the workflows, but there 
 are no required fields.
 
-#### format-version
+#### usm-wif-version
 
-Field "format-version" corresponds to the version of the USM Workflow 
+Field "usm-wif-version" corresponds to the version of the USM Workflow 
 Interchange format. The value MUST be a JSON string. The versioning is
 based on semantic versioning [SEMVER2]. For this version of the document, 
 it MUST be string literal "1.0.0".
@@ -286,7 +286,7 @@ JSON list of Step entities.
 
 ```
   {
-    "format-version": "1.0.0",
+    "usm-wif-version": "1.0.0",
     "source-system-type": "foo.com:bar",
     "source-system-version": "1.0",
     "source-system-instance": "5831e06b-d579-4a32-91f8-877a18ae7118",
