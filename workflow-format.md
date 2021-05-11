@@ -43,8 +43,10 @@ required fields are more relaxed.
 
 ### Terminology
 
-USM Workflow Interchange Format (USM-WIF)
-: JSON format defined in this document for USM Workflow interchange.
+<dl>
+    <dt>USM Workflow Interchange Format (USM-WIF)</dt>
+    <dd>JSON format defined in this document for USM Workflow interchange.</dd>
+</dl>
 
 ### Notational Conventions
 
