@@ -259,7 +259,7 @@ JSON list of Step entities.
 
 ### Example
 
-```json
+```
   {
     "format-version": "1.0.0",
     "source-system-type": "foo.com:bar",
@@ -305,7 +305,7 @@ if present, name MUST be a JSON string for the email of the person. The value is
 
 #### Example 
 
-```json
+```
 {
     "id": "s393939"
     "name": "Mikko Ahonen",
@@ -329,7 +329,7 @@ Human-readable name for the profile. This field MUST be a JSON string.
 
 #### Example
 
-```json
+```
     {
         "id": "operator",
         "name": "IT service desk Operator"
@@ -384,7 +384,7 @@ activities is a JSON list containing Activity entities.
 
 #### Example
 
-```json
+```
     {
         "id": "1",
         "sort-index": "3",
@@ -426,7 +426,7 @@ literals, referring to the RACI model responsibility roles.
 * "C" - Consulted
 * "I" - Informed
 
-```json
+```
     {
         "id": "1",
         "sort-index": "1",
