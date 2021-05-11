@@ -477,8 +477,8 @@ specific to USM-WIF.
 
 # Acknowledgments
 
-   The authors would like to thank the following people for their 
-   valuable contributions: ...
+The authors would like to thank the following people for their 
+valuable contributions: ...
 
 #  References
 
