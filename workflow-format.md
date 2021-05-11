@@ -150,7 +150,7 @@ are no required fields.
 Field "format-version" corresponds to the version of the USM Workflow 
 Interchange format. The value MUST be a JSON string. The versioning is
 based on semantic versioning [SEMVER2]. For this version of the document, 
-it MUST be string literal "1.0.0"
+it MUST be string literal "1.0.0".
 
 #### source-system-type 
 
