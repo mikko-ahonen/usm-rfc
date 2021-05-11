@@ -43,7 +43,7 @@ place in the life cycle of definitions.
 
 ### Terminology
 
-    TODO
+TODO
 
 ### Notational Conventions
 
@@ -187,8 +187,6 @@ This field identifies the last modifier of the workflow.
 
 The value MUST be a Person entity represented as JSON object.
 
-#### Example
-
 #### process
 
 process field specifies the USM process.
@@ -253,11 +251,11 @@ literal values is allowed.
 * "workflow" - For workflows. Workflows are more commonly used for interoperabilty between Business Process
   Management (BPM) and Workflow systems.
 
-### steps
+#### steps
 
 JSON list of Step entities.
 
-### Example
+#### Example
 
 ```
   {
@@ -426,6 +424,8 @@ literals, referring to the RACI model responsibility roles.
 * "C" - Consulted
 * "I" - Informed
 
+#### Example
+
 ```
     {
         "id": "1",
@@ -440,7 +440,7 @@ literals, referring to the RACI model responsibility roles.
 
 # Internationalization and Localization
 
-    TODO
+TODO
 
 # Security Considerations
 
