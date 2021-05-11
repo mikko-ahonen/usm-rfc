@@ -44,19 +44,19 @@ required fields are more relaxed.
 ### Terminology
 
 <dl>
-    <dt>USM Workflow Interchange Format (USM-WIF)</dt>
-    <dd>JSON format defined in this document for USM Workflow interchange.</dd>
+<dt>USM Workflow Interchange Format (USM-WIF)</dt>
+<dd>JSON format defined in this document for USM Workflow interchange.</dd>
 
-    <dt>Must-Ignore Policy</dt>
-    <dd>When an implementation encounters a protocol element that it does not
-        recognize, it should treat the rest of the protocol transaction as if
-        the new element simply did not appear, and in particular, the
-        implementation MUST NOT treat this as an error condition. [RFC7493]</dd>
+<dt>Must-Ignore Policy</dt>
+<dd>When an implementation encounters a protocol element that it does not
+recognize, it should treat the rest of the protocol transaction as if
+the new element simply did not appear, and in particular, the
+implementation MUST NOT treat this as an error condition. [RFC7493]</dd>
 
-    <dt>Must-Understand Policy</dt>
-    <dd>Implementations do not tolerate the introduction of new elements 
-        that they do not recognize, but treat them as an error condition.
-        [RFC7493]</dd>
+<dt>Must-Understand Policy</dt>
+<dd>Implementations do not tolerate the introduction of new elements 
+that they do not recognize, but treat them as an error condition.
+[RFC7493]</dd>
 </dl>
 
 ### Notational Conventions
