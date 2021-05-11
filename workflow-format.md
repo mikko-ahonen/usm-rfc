@@ -73,22 +73,18 @@ Two temporary MIME types are proposed to be used. Later, we aim to
 register corresponding MIME types with IANA (Internet Assigned 
 Numbers Authority).
 
-application/x-usm-workflow-template
-    MIME type used for workflow templates.
+"application/x-usm-workflow-template" - MIME type used for workflow templates.
 
-application/x-usm-workflow
-    MIME type used for workflows.
+"application/x-usm-workflow" - MIME type used for workflows.
 
 ## File extensions
 
 Two following filename extensions SHOULD be used for the
 file formats.
 
-.workflow-template.json
-    File extension used for workflow templates.
+".workflow-template.json" - File extension used for workflow templates.
 
-.workflow.json
-    File extension used for workflows.
+".workflow.json" - File extension used for workflows.
 
 ## Entities
 
@@ -451,8 +447,6 @@ literals, referring to the RACI model responsibility roles.
 All the security considerations that apply to JSON (see [RFC 7159])
 apply to this format. There are no additional security considerations
 specific to USM-WIF.
-
-# An Example
 
 # Acknowledgments
 
