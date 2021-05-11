@@ -2,7 +2,7 @@
 
 ## Abstract
 
-USM Workflow Interchange Format represents descriptions of Unified Service 
+USM Workflow Interchange Format (USM-WIF) represents descriptions of Unified Service 
 Management (USM) workflows using JSON-based data structures. The 
 purpose is to allow for interoperability between systems
 supporting the USM method. JSON is a lightweight, text-based, 
@@ -22,7 +22,7 @@ document authors. All rights reserved.
 
 ## Introduction
 
-USM Workflow Interchange Format represents descriptions of Unified Service 
+USM Workflow Interchange Format USM-WIF represents descriptions of Unified Service 
 Management (USM) workflows using Javascript Object Notation (JSON) based 
 data structures.
 
@@ -88,7 +88,13 @@ Two file extensions are proposed.
 .workflow.json
     File extension used for workflows.
 
-## Fields
+## Entities
+
+### Profile
+
+
+
+## Attributes
 
 ### format-version
 
@@ -100,16 +106,17 @@ The value MUST be a JSON string. The versioning is based on semantic versioning
 
 Example:
 
+```json
   {
     ...
     "format-version": "1.0.0",
     ...
   }
+```
 
+### source-system-type
 
-### originating-system-type
-
-originating-system-type uniquely identifies the originating system.
+source-system-type uniquely identifies the originating system.
 
 The value MUST be a JSON string. The value MUST consist of two
 parts, seperated by colon. First part MUST be the domain name of 
@@ -121,29 +128,33 @@ Colon is used as a separator.
 
 Example:
 
+```json
   {
     ...
-    "originating-system-type": "foo.com:bar",
+    "source-system-type": "foo.com:bar",
     ...
   }
+```
 
-### originating-system-version
+### source-system-version
 
-originating-system-version uniquely identifies the version of originating system.
+source-system-version uniquely identifies the version of originating system.
 
 The value MUST be JSON string. The values are system-specific.
 
 Example:
 
+```json
   {
     ...
-    "originating-system-version": "1.0",
+    "source-system-version": "1.0",
     ...
   }
+```
 
-### originating-system-instance
+### source-system-instance
 
-originating-system-instance uniquely identifies the instance of the originating system.
+source-system-instance uniquely identifies the instance of the originating system.
 
 The value MUST be a JSON string. The values are system-specific, but aggregate
 of (originating-system-type, originating-system-instance) MUST be globally
@@ -151,11 +162,13 @@ unique.
 
 Example:
 
+```json
   {
     ...
     "originating-system-instance": "5831e06b-d579-4a32-91f8-877a18ae7118",
     ...
   }
+```
 
 ### workflow-version
 
@@ -168,11 +181,13 @@ ordering of the values from the values. The example below uses UUIDs.
 
 Example:
 
+```json
   {
     ...
     "workflow-version": "656e6bcd3e683982a572401b879d6db4b2931a4c",
     ...
   }
+```
 
 ### created-at
 
@@ -183,11 +198,13 @@ The value MUST be a JSON string, and it MUST correspond to the ISO-8601 date and
 
 Example:
 
+```json
   {
     ...
     "created-at": "2021-03-22T07:38:22.800+00:00",
     ...
   }
+```
 
 ### created-by
 
@@ -206,6 +223,7 @@ email - optional
 
 Example: 
 
+```json
   {
     ...
     "created-by": {
@@ -215,6 +233,7 @@ Example:
     },
     ...
  }
+```
 
 ### modified-at
 
@@ -225,12 +244,13 @@ The value MUST be a JSON string, and it MUST correspond to the ISO-8601 date and
 
 Example:
 
+```json
   {
     ...
     "modified-at": "2021-03-22T07:38:22.800+00:00",
     ...
   }
-
+```
 
 ### modified-by
 
@@ -249,6 +269,7 @@ email - optional
 
 Example: 
 
+```json
   {
     ...
     "modified-by": {
@@ -258,6 +279,7 @@ Example:
     },
     ...
  }
+```
 
 ### process
 
@@ -280,6 +302,16 @@ The value MUST be a JSON string, and it MUST have one of the following string li
 "improve"
   Improve process
 
+Example:
+
+```json
+  {
+    ...
+    "process": "agree",
+    ...
+ }
+```
+
 ### dynamicity
 
 dynamicity field specifies whether the workflow is static or dynamic, with the following string literal values:
@@ -290,6 +322,16 @@ dynamicity field specifies whether the workflow is static or dynamic, with the f
 "dynamic"
   For dynamic workflows, it is determined at the fork step in the workflow.
 
+Example:
+
+```json
+  {
+    ...
+    "dynamicity": "static",
+    ...
+  }
+```
+
 ### context
 
 context field identifies the domain for the workflows. The field MUST be unique within the
@@ -297,6 +339,16 @@ system instance.
 
 The name MUST be a JSON string. The values are typically specific to the organization 
 where USM is deployed. For example, they might correspond to the organization hierarchy.
+
+Example:
+
+```json
+  {
+    ...
+    "context": "it-infra",
+    ...
+  }
+```
 
 ### slug
 
@@ -308,17 +360,47 @@ The slug MUST be a JSON string. Workflow definition MUST include this field.
 The field MUST only contain alphanumeric characters and dashes. The field MUST NOT start or end with
 dashes, or contain multiple consequtive dashes.
 
+Example:
+
+```json
+  {
+    ...
+    "slug": "new-laptop",
+    ...
+  }
+```
+
 ### name
 
 name field is a human-readable name of the workflow. The name SHOULD be unique within the context.
 
 The name MUST be a JSON string. Workflow definition MUST include this field.
 
+```json
+Example:
+
+  {
+    ...
+    "name": "Order a new laptop",
+    ...
+  }
+```
+
 ### description
 
 description field identifies the human-readable description of the workflow.
 
 The description MUST be a JSON string. Workflow definition MAY include this field.
+
+Example:
+
+```json
+  {
+    ...
+    "description": "New laptop workflow for both consultants and internal emplyoees without existing accounts.",
+    ...
+  }
+```
 
 ### type
 
@@ -332,11 +414,53 @@ literal values is allowed.
   For workflows. Workflows are more commonly used for interoperabilty between Business Process
   Management (BPM) and Workflow systems.
 
+Example:
+
+```json
+  {
+    ...
+    "type": "workflow",
+    ...
+  }
+```
+
 ### steps
 
 Contains a JSON list of step items, defined below.
 
+Example:
+
+```json
+  {
+    ...
+    "steps": [
+        {
+            ... 
+        },  
+        ...
+        {
+            ...
+        }
+    ],
+    ...
+  }
+```
+
 #### step item
+
+Example:
+
+```json
+    ...
+    {
+        "id": ...,
+        "name": ...,
+        "description": ...,
+        "activities": [ ...
+        ],
+    },  
+    ...
+```
 
 ##### id
 
@@ -344,13 +468,44 @@ id field MUST uniquely identify the step within the workflow.
 
 This field MUST be a JSON string.
 
+Example:
+
+```json
+    ...
+    "id": "1",
+    ...
+```
+
+##### sort-index
+
+sort-index is an optional field, that if present, suggests the ascending ordering 
+of the steps.
+
+The value MUST be a non-negative JSON integer.
+
+Example:
+
+```json
+    ...
+    "sort-index": "3",
+    ...
+```
+
 ##### name
 
 name field is a human-readable name for the step.
 
 This field MUST be a JSON string.
 
-##### name
+Example:
+
+```json
+  ...
+  "name": "Accept the erquest",
+  ...
+```
+
+##### description
 
 description field is a human-readable description for the step.
 
@@ -403,7 +558,9 @@ name
 
 # Security Considerations
 
-    TODO
+All the security considerations that apply to JSON (see [RFC 7159])
+apply to this format. There are no additional security considerations
+specific to USM-WIF.
 
 # An Example
 
