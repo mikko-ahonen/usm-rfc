@@ -92,10 +92,35 @@ file formats.
 
 ## Entities
 
+The diagram below the relationships between the main entities. Person entity 
+has been omitted for simplicity.
+
+    +-------------------+
+    | Workflow          |
+    | +---------------+ |
+    | | Step          | |
+    | | +----------+  | |
+    | | | Activity |  | |
+    | | +----------+  | |
+    | | +----------+  | |
+    | | | Activity |  | |
+    | | +----------+  | |
+    | | +----------+  | |
+    | | | Activity |  | |
+    | | +----------+  | |
+    | +---------------+ |
+    | +---------------+ |
+    | | Profile       | |
+    | +---------------+ |
+    | +---------------+ |
+    | | Profile       | |
+    | +---------------+ |
+    +-------------------+
+
 ### Workflow and Workflow template
 
-Workflow is the top-level entity described here. Workflow templates
-follow the same format as the workflows, but there are no required fields.
+Workflow is the top-level entity. Workflow templates follow the same format as 
+the workflows, but there are no required fields.
 
 format-version
 
@@ -228,8 +253,6 @@ context
     The name MUST be a JSON string. The values are typically specific to the organization 
     where USM is deployed. For example, they might correspond to the organization hierarchy.
 
-    "context": "it-infra",
-
 slug
 
     slug field identifies short, human-readable name of the workflow. The slug MUST be unique within the
@@ -262,10 +285,6 @@ type
     * "workflow" - For workflows. Workflows are more commonly used for interoperabilty between Business Process
       Management (BPM) and Workflow systems.
 
-    ...
-  }
-```
-
 steps
 
     JSON list of Step entities.
@@ -289,15 +308,11 @@ email - optional
 Example: 
 
 ```json
-  {
-    ...
-    "created-by": {
+    {
         "id": "s393939"
         "name": "Mikko Ahonen",
         "email": "mikko@usm.coach"
-    },
-    ...
- }
+    }
 ```
 
 ### Profile
@@ -313,6 +328,13 @@ id
 name
 
     Human-readable name for the profile. This field MUST be a JSON string.
+
+```json
+    {
+        "id": "operator",
+        "name": "IT service desk Operator"
+    }
+```
 
 ### Step
 
