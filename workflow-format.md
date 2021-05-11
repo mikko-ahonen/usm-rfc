@@ -517,3 +517,11 @@ specific to USM-WIF.
 ## Informative References
 
    ...
+
+## Author's Address
+
+   Mikko Ahonen (editor)
+   USM Coach
+
+   E-Mail: mikko@usm.coach
+   URI:    https://usm.coach/
