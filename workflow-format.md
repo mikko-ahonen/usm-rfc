@@ -92,8 +92,8 @@ file formats.
 
 ## Entities
 
-The diagram below the relationships between the main entities. Person entity 
-has been omitted for simplicity.
+The diagram below shows the relationships between the main entities. 
+Person entity has been omitted for simplicity.
 
     +-------------------+
     | Workflow          |
