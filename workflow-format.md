@@ -122,76 +122,146 @@ Person entity has been omitted for simplicity.
 Workflow is the top-level entity. Workflow templates follow the same format as 
 the workflows, but there are no required fields.
 
-format-version
+#### format-version
 
-    Field "format-version" corresponds to the version of the USM Workflow 
-    Interchjange format. The value MUST be a JSON string. The versioning is
-    based on semantic versioning [SEMVER2]. For this version of the document, 
-    it MUST be string literal "1.0.0"
+Field "format-version" corresponds to the version of the USM Workflow 
+Interchjange format. The value MUST be a JSON string. The versioning is
+based on semantic versioning [SEMVER2]. For this version of the document, 
+it MUST be string literal "1.0.0"
 
-source-system-type 
+#### source-system-type 
 
-    Field "source-system-type" uniquely identifies the originating system.
+Field "source-system-type" uniquely identifies the originating system.
 
-    The value MUST be a JSON string. The value MUST consist of two
-    parts, seperated by colon. First part MUST be the domain name of 
-    the system vendor. The second part is system name, uniquely identifying
-    the software within the vendor.
+The value MUST be a JSON string. The value MUST consist of two
+parts, seperated by colon. First part MUST be the domain name of 
+the system vendor. The second part is system name, uniquely identifying
+the software within the vendor.
 
-    The identifier MUST contain only alphanumeric characters and dash.
-    Colon is used as a separator.
+The identifier MUST contain only alphanumeric characters and dash.
+Colon is used as a separator.
 
-source-system-version
+#### source-system-version
 
-    source-system-version uniquely identifies the version of originating system.
+source-system-version uniquely identifies the version of originating system.
 
-    The value MUST be JSON string. The values are system-specific.
+The value MUST be JSON string. The values are system-specific.
 
-source-system-instance
+#### source-system-instance
 
-    source-system-instance uniquely identifies the instance of the originating system.
+source-system-instance uniquely identifies the instance of the originating system.
 
-    The value MUST be a JSON string. The values are system-specific, but aggregate
-    of (originating-system-type, originating-system-instance) MUST be globally
-    unique.
+The value MUST be a JSON string. The values are system-specific, but aggregate
+of (originating-system-type, originating-system-instance) MUST be globally
+unique.
 
-workflow-version
+#### workflow-version
 
-    workflow-version field specifies the version of the content.
+workflow-version field specifies the version of the content.
 
-    The value MUST be JSON string. The actual value is specific to originating
-    system. The value MUST be unique within the workflow. The versioning MAY
-    use semantic versioning [SEMVER2]. However, it might not be possible to deduce
-    ordering of the values from the values. The example below uses UUIDs.
+The value MUST be JSON string. The actual value is specific to originating
+system. The value MUST be unique within the workflow. The versioning MAY
+use semantic versioning [SEMVER2]. However, it might not be possible to deduce
+ordering of the values from the values. The example below uses UUIDs.
 
-created-at
+#### created-at
 
-    created-at field specifies the time the workflow was originally created.
+created-at field specifies the time the workflow was originally created.
 
-    The value MUST be a JSON string, and it MUST correspond to the ISO-8601 date and time format 
-    [ISO-8601-1984]. Milliseconds SHOULD be used to provide better granularity.
+The value MUST be a JSON string, and it MUST correspond to the ISO-8601 date and time format 
+[ISO-8601-1984]. Milliseconds SHOULD be used to provide better granularity.
 
-created-by
+#### created-by
 
-    created-by field identifies the creator of the workflow.
+created-by field identifies the creator of the workflow.
 
-    The value MUST be a Person entity represented as JSON object.
+The value MUST be a Person entity represented as JSON object.
 
-modified-at
+#### modified-at
 
-    modified-at field specifies the last time the workflow was modified.
+modified-at field specifies the last time the workflow was modified.
 
-    The value MUST be a JSON string, and it MUST correspond to the ISO-8601 date 
-    and time format [ISO-8601-1984]. Milliseconds SHOULD be used to provide better 
-    granularity.
+The value MUST be a JSON string, and it MUST correspond to the ISO-8601 date 
+and time format [ISO-8601-1984]. Milliseconds SHOULD be used to provide better 
+granularity.
 
-modified-by
+#### modified-by
 
-    This field identifies the last modifier of the workflow.
+This field identifies the last modifier of the workflow.
 
-    The value MUST be a Person entity represented as JSON object.
+The value MUST be a Person entity represented as JSON object.
 
-Example:
+#### Example
+
+#### process
+
+process field specifies the USM process.
+
+The value MUST be a JSON string, and it MUST have one of the following string literal values:
+
+* "agree" - Agree process
+
+* "change" - Change process
+
+* "recover" - Recover process
+
+* "operate" - Operate process
+
+* "improve" - Improve process
+
+#### dynamicity
+
+This field specifies whether the workflow is static or dynamic, with the following string literal values:
+
+* "static" - For static workflows, the path through the USM processes is pre-defined.
+
+* "dynamic" - For dynamic workflows, where path is determined at the fork step in the workflow.
+
+#### context
+
+context field identifies the domain for the workflows. The field MUST be unique within the
+system instance. 
+
+The name MUST be a JSON string. The values are typically specific to the organization 
+where USM is deployed. For example, they might correspond to the organization hierarchy.
+
+#### slug
+
+slug field identifies short, human-readable name of the workflow. The slug MUST be unique within the
+context.
+
+The slug MUST be a JSON string. Workflow definition MUST include this field.
+
+The field MUST only contain alphanumeric characters and dashes. The field MUST NOT start or end with
+dashes, or contain multiple consequtive dashes.
+
+#### name
+
+name field is a human-readable name of the workflow. The name SHOULD be unique within the context.
+
+The name MUST be a JSON string. Workflow definition MUST include this field.
+
+#### description
+
+description field identifies the human-readable description of the workflow.
+
+The description MUST be a JSON string. Workflow definition MAY include this field.
+
+#### type
+
+type field identifies the type of the document. It MUST be a JSON string, and one of two string 
+literal values is allowed.
+
+* "workflow-template" - For workflow templates. Workflow templates are used as a basis for workflow definitions.
+
+* "workflow" - For workflows. Workflows are more commonly used for interoperabilty between Business Process
+  Management (BPM) and Workflow systems.
+
+### steps
+
+JSON list of Step entities.
+
+### Example
 
 ```json
   {
@@ -221,98 +291,30 @@ Example:
   }
 ```
 
-process
-
-    process field specifies the USM process.
-
-    The value MUST be a JSON string, and it MUST have one of the following string literal values:
-
-    * "agree" - Agree process
-
-    * "change" - Change process
-
-    * "recover" - Recover process
-
-    * "operate" - Operate process
-
-    * "improve" - Improve process
-
-dynamicity
-
-    This field specifies whether the workflow is static or dynamic, with the following string literal values:
-
-    * "static" - For static workflows, the path through the USM processes is pre-defined.
-
-    * "dynamic" - For dynamic workflows, where path is determined at the fork step in the workflow.
-
-context
-
-    context field identifies the domain for the workflows. The field MUST be unique within the
-    system instance. 
-
-    The name MUST be a JSON string. The values are typically specific to the organization 
-    where USM is deployed. For example, they might correspond to the organization hierarchy.
-
-slug
-
-    slug field identifies short, human-readable name of the workflow. The slug MUST be unique within the
-    context.
-
-    The slug MUST be a JSON string. Workflow definition MUST include this field.
-
-    The field MUST only contain alphanumeric characters and dashes. The field MUST NOT start or end with
-    dashes, or contain multiple consequtive dashes.
-
-name
-
-    name field is a human-readable name of the workflow. The name SHOULD be unique within the context.
-
-    The name MUST be a JSON string. Workflow definition MUST include this field.
-
-description
-
-    description field identifies the human-readable description of the workflow.
-
-    The description MUST be a JSON string. Workflow definition MAY include this field.
-
-type
-
-    type field identifies the type of the document. It MUST be a JSON string, and one of two string 
-    literal values is allowed.
-
-    * "workflow-template" - For workflow templates. Workflow templates are used as a basis for workflow definitions.
-
-    * "workflow" - For workflows. Workflows are more commonly used for interoperabilty between Business Process
-      Management (BPM) and Workflow systems.
-
-steps
-
-    JSON list of Step entities.
-
 ### Person
 
 Entity refers to people, represented as an JSON object, with the following fields:
 
-id - required
+#### id - required
 
-    id MUST be a JSON string uniquely identifying the person within the workflow system instance.
+id MUST be a JSON string uniquely identifying the person within the workflow system instance.
 
-name - optional
+#### name - optional
 
-    if present, name MUST be a JSON string for the name of the person. The value is optional.
+if present, name MUST be a JSON string for the name of the person. The value is optional.
 
-email - optional
+#### email - optional
 
-    if present, name MUST be a JSON string for the email of the person. The value is optional.
+if present, name MUST be a JSON string for the email of the person. The value is optional.
 
-Example: 
+#### Example 
 
 ```json
-    {
-        "id": "s393939"
-        "name": "Mikko Ahonen",
-        "email": "mikko@usm.coach"
-    }
+{
+    "id": "s393939"
+    "name": "Mikko Ahonen",
+    "email": "mikko@usm.coach"
+}
 ```
 
 ### Profile
@@ -320,14 +322,16 @@ Example:
 Profile refers to either role or position in the organization hierarchy, that may be
 assigned responsibilities for this workflow. It is represented as a JSON object.
 
-id
+#### id
 
-    This field MUST uniquely identify the role or position. This value MUST be JSON string.
-    This field MUST be unique within the organization using this USM deployment.
+This field MUST uniquely identify the role or position. This value MUST be JSON string.
+This field MUST be unique within the organization using this USM deployment.
 
-name
+#### name
 
-    Human-readable name for the profile. This field MUST be a JSON string.
+Human-readable name for the profile. This field MUST be a JSON string.
+
+#### Example
 
 ```json
     {
@@ -338,51 +342,51 @@ name
 
 ### Step
 
-Step is a JSON entity
+Step is an entity representing a step in the USM process model.
 
-id
+#### id
 
-    id field MUST uniquely identify the step within the workflow.
+id field MUST uniquely identify the step within the workflow.
 
-    This field MUST be a JSON string.
+This field MUST be a JSON string.
 
-    This field is pre-filled from the template.
+This field is pre-filled from the template.
 
-sort-index
+#### sort-index
 
-    sort-index is an optional field, that if present, suggests the ascending ordering 
-    of the steps within the workflow.
+sort-index is an optional field, that if present, suggests the ascending ordering 
+of the steps within the workflow.
 
-    The value MUST be a non-negative JSON integer.
+The value MUST be a non-negative JSON integer.
 
-name
+#### name
 
-    name field is a human-readable name for the step.
+name field is a human-readable name for the step.
 
-    This field MUST be a JSON string.
+This field MUST be a JSON string.
 
-    This field is pre-filled from the template.
+This field is pre-filled from the template.
 
-description
+#### description
 
-    description field is a human-readable description for the step.
+description field is a human-readable description for the step.
 
-    This field MUST be a JSON string.
+This field MUST be a JSON string.
 
-    This field is pre-filled from the template.
+This field is pre-filled from the template.
 
-process
+#### process
 
-    process field specifies the USM process for this step.
+process field specifies the USM process for this step.
 
-    The value MUST be a JSON string, and it MUST have one of the same 
-    string literal values defined for the process.
+The value MUST be a JSON string, and it MUST have one of the same 
+string literal values defined for the process.
 
-activities
+#### activities
 
-    activities is a JSON list containing Activity entities.
+activities is a JSON list containing Activity entities.
 
-Example:
+#### Example
 
 ```json
     {
@@ -400,29 +404,31 @@ Example:
 Describes one activity within the step, and the responsiblity assignment
 matrix according to the RACI model [RACI].
 
-id
-    This field MUST uniquely identify the activity within the step. This field MUST 
-    be a JSON string.
+#### id
+
+This field MUST uniquely identify the activity within the step. This field MUST 
+be a JSON string.
   
-sort-index
+#### sort-index
 
-    sort-index is an optional field, that if present, suggests the ascending ordering 
-    of the activities within the step.
+sort-index suggests the ascending ordering of the activities within the step.
 
-    The value MUST be a non-negative JSON integer.
+The value MUST be a non-negative JSON integer.
 
-description
-    Human-readable description of the activity. This field MUST be a JSON string.
+#### description
 
-responsibilities
-    List of responsibility assignments. The field value MUST be a JSON object, 
-    where key is the identifier of a profile, and value is a list of JSON string 
-    literals, referring to the RACI model responsibility roles.
+Human-readable description of the activity. This field MUST be a JSON string.
 
-    * "R" - Responsible
-    * "A" - Accountable
-    * "C" - Consulted
-    * "I" - Informed
+#### responsibilities
+
+List of responsibility assignments. The field value MUST be a JSON object, 
+where key is the identifier of a profile, and value is a list of JSON string 
+literals, referring to the RACI model responsibility roles.
+
+* "R" - Responsible
+* "A" - Accountable
+* "C" - Consulted
+* "I" - Informed
 
 ```json
     {
